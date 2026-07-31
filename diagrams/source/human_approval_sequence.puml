@@ -1,0 +1,58 @@
+@startuml human_approval_sequence
+title OIOF — Human Approval Sequence
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 6
+skinparam sequenceMessageAlign center
+skinparam ArrowColor #4A5568
+skinparam sequence {
+  ParticipantBackgroundColor #F7FAFC
+  ParticipantBorderColor #4A5568
+  LifeLineBorderColor #A0AEC0
+  ActorBackgroundColor #FCE8E8
+  ActorBorderColor #A0522D
+  BoxBackgroundColor #FAFAFA
+  BoxBorderColor #A0AEC0
+}
+
+actor "SRE / Analyst" as Analyst
+participant "Deterministic\nEvidence Collector" as Collector
+participant "Orchestrator LLM\n(Prompt 01)" as LLM1
+participant "Challenger LLM\n(Prompt 02, fresh context)" as LLM2
+actor "Named Decision Owner\n(per Decision Matrix row)" as Owner
+actor "Incident Commander" as IC
+database "Audit Trail" as Audit
+
+Analyst -> Collector : trigger evidence collection
+Collector -> Collector : validate against\nschemas/*.json
+Collector -> Audit : log validation result
+Collector -> LLM1 : validated evidence bundle\n+ evidence_manifest.yaml
+
+LLM1 -> LLM1 : classify facts / inferences /\nhypotheses / contradictions
+LLM1 -> Audit : log analysis (evidence-cited)
+LLM1 -> LLM2 : analysis output\n(new context)
+
+LLM2 -> LLM2 : challenge from 4 perspectives\n(Tech Ops, Product, Risk, IC)
+LLM2 -> Audit : log challenge review
+
+LLM2 -> Owner : analysis + challenge +\ndraft Decision Matrix
+LLM2 -> IC : same, for coordination
+
+note over Owner, IC
+  No production, customer, or vendor
+  action occurs before this point.
+end note
+
+alt approved within deadline
+  Owner -> Audit : log approval (named role)
+  Owner -> Collector : trigger deterministic\nexecution tooling
+  Collector -> Audit : log execution result
+else rejected
+  Owner -> Audit : log rejection + rationale
+else deadline passes, no response
+  Collector -> IC : automatic escalation\n(never auto-approve)
+  IC -> Audit : log timeout escalation
+end
+
+@enduml

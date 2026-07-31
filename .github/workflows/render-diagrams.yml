@@ -1,0 +1,75 @@
+name: Verify Generated Assets
+
+# This workflow never commits or pushes. It regenerates
+# diagrams/rendered/ and assets/linkedin/rendered/ from their source in
+# a clean checkout and fails if that regeneration produces any diff,
+# which means the version committed to the branch is stale. Contributors
+# fix staleness locally with `make diagrams` / `make linkedin-assets`
+# and commit the result themselves — see CONTRIBUTING.md.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "diagrams/source/**"
+      - "diagrams/rendered/**"
+      - "assets/linkedin/source/**"
+      - "assets/linkedin/rendered/**"
+      - "scripts/render_diagrams.sh"
+      - "scripts/export_linkedin_assets.py"
+      - "scripts/validate_linkedin_assets.py"
+  pull_request:
+    branches: [main]
+    paths:
+      - "diagrams/source/**"
+      - "diagrams/rendered/**"
+      - "assets/linkedin/source/**"
+      - "assets/linkedin/rendered/**"
+      - "scripts/render_diagrams.sh"
+      - "scripts/export_linkedin_assets.py"
+      - "scripts/validate_linkedin_assets.py"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Install PlantUML
+        run: sudo apt-get update && sudo apt-get install -y plantuml
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Render diagrams from source
+        run: bash scripts/render_diagrams.sh
+
+      - name: Export LinkedIn carousel assets from source
+        run: python3 scripts/export_linkedin_assets.py
+
+      - name: Validate LinkedIn carousel assets
+        run: python3 scripts/validate_linkedin_assets.py
+
+      - name: Fail if generated assets are stale
+        run: |
+          if ! git diff --exit-code -- diagrams/rendered assets/linkedin/rendered; then
+            echo "::error::diagrams/rendered/ and/or assets/linkedin/rendered/ do not match their source."
+            echo "Run 'make diagrams' and 'make linkedin-assets' locally, then commit the result."
+            exit 1
+          fi
+
+      - name: Upload rendered assets as a build artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: rendered-assets
+          path: |
+            diagrams/rendered/
+            assets/linkedin/rendered/

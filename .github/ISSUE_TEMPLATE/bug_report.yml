@@ -1,0 +1,69 @@
+name: Bug report
+description: Something in the dataset, prompts, diagrams, schemas, or tooling is broken or inconsistent.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. Since this repository
+        is a reference implementation, "bug" usually means an internal
+        inconsistency (a broken evidence citation, a validator false
+        positive/negative, a stale rendered diagram, a schema mismatch)
+        rather than a runtime crash.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where is the problem?
+      options:
+        - dataset/ (synthetic evidence, evidence_manifest.yaml)
+        - prompts/ (the four orchestration prompts)
+        - examples/ (illustrative outputs, traceability)
+        - diagrams/ (PlantUML source or rendered output)
+        - assets/linkedin/ (carousel assets)
+        - schemas/ (JSON Schemas)
+        - scripts/ or tests/ (validation tooling)
+        - docs/ or README
+        - CI (GitHub Actions)
+        - Other / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What's wrong?
+      description: A clear description of the inconsistency or failure.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: >
+        Exact command(s) run, e.g. `make validate`, `make test`, or
+        `make diagrams`. Paste the relevant error output if there is
+        any.
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, and whether PlantUML/Java is installed locally.
+      placeholder: "e.g. macOS 15, Python 3.12, PlantUML installed via Homebrew"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I ran `make validate` and/or `make test` and it did not catch this.
+          required: false
+        - label: This is not a request to change the synthetic incident's design (ambiguity, ordering, tone) — it's a factual inconsistency or defect.
+          required: false

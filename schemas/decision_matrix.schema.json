@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/oiof/schemas/decision_matrix.schema.json",
+  "title": "Decision Matrix Entry",
+  "description": "One row of a Decision Matrix (examples/decision_matrix.md). The AI-generated analysis populates every field except 'status' and any post-hoc approval fields; 'decision_owner' must always be a named human role, never the model itself.",
+  "type": "object",
+  "required": [
+    "decision_id",
+    "decision_required",
+    "trigger",
+    "evidence_ids",
+    "confidence",
+    "customer_risk",
+    "operational_risk",
+    "reversibility",
+    "options",
+    "recommended_option",
+    "decision_owner",
+    "consulted_roles",
+    "approval_deadline",
+    "fallback",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "decision_id": { "type": "string", "description": "e.g. DEC-001" },
+    "decision_required": { "type": "string" },
+    "trigger": {
+      "type": "string",
+      "description": "The condition or evidence that raised this decision."
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+    "customer_risk": { "type": "string", "enum": ["low", "medium", "high"] },
+    "operational_risk": { "type": "string", "enum": ["low", "medium", "high"] },
+    "reversibility": {
+      "type": "string",
+      "enum": ["easily_reversible", "reversible_with_effort", "difficult_to_reverse", "irreversible"]
+    },
+    "options": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2,
+      "description": "At least two real options, including an explicit 'do nothing / continue monitoring' option where applicable."
+    },
+    "recommended_option": {
+      "type": "string",
+      "description": "Which option is recommended and why - a recommendation, not a decision already made."
+    },
+    "decision_owner": {
+      "type": "string",
+      "description": "A named human role accountable for this decision (e.g. 'Checkout Engineering Lead'). Must never be 'AI', 'the model', or similar.",
+      "not": { "pattern": "(?i).*\\b(ai|artificial intelligence|llm|language model|the model|assistant|claude|chatgpt|gpt-[0-9]+)\\b.*" }
+    },
+    "consulted_roles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "approval_deadline": {
+      "type": "string",
+      "description": "ISO 8601 timestamp or a relative deadline description."
+    },
+    "fallback": {
+      "type": "string",
+      "description": "What happens if the deadline passes without a decision (must escalate, never auto-execute)."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "Pending Approval",
+        "Approved & Executed",
+        "Rejected",
+        "Deferred",
+        "Superseded"
+      ]
+    }
+  }
+}

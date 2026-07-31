@@ -1,0 +1,82 @@
+@startuml responsibility_model
+title OIOF — Responsibility Model (RACI-inspired)
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #718096
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor #F7FAFC
+  BorderColor #4A5568
+  FontStyle bold
+}
+skinparam note {
+  BackgroundColor #FFFDF0
+  BorderColor #D4B106
+}
+
+legend top left
+  Solid package = role with at least one
+  **Accountable (A)** activity (shown inside).
+  Dashed box = role that is only Consulted or
+  Informed in this incident type (no sole
+  ownership of a listed activity). Dashed
+  arrows show selected Consulted relationships.
+  Full R/A/C/I table: docs/governance.md
+endlegend
+
+package "Incident Commander" as IC {
+  card "Incident declaration" as A1
+  card "Executive reporting" as A8
+  card "Incident closure" as A10
+  card "Post-incident review" as A11
+}
+
+package "SRE Lead" as SRE {
+  card "Technical diagnosis" as A2
+  card "Evidence retention" as A9
+}
+
+package "Checkout Engineering Lead" as CEL {
+  card "Rollback approval" as A4
+}
+
+package "Payment Operations Lead" as POL {
+  card "Provider rerouting" as A5
+}
+
+package "Fraud Operations Lead" as FOL {
+  card "Fraud-rule change" as A6
+}
+
+package "Product Owner" as PO {
+  card "Customer-impact\nassessment" as A3
+}
+
+package "Communications Lead" as CML {
+  card "Customer communication" as A7
+}
+
+rectangle "Risk and Governance\n(Consulted only)" as RG #FFFFFF;line:A0AEC0;line.dashed;text:718096
+rectangle "Executive Sponsor\n(Informed only)" as ES #FFFFFF;line:A0AEC0;line.dashed;text:718096
+rectangle "Vendor Manager\n(Consulted only)" as VM #FFFFFF;line:A0AEC0;line.dashed;text:718096
+
+A4 .down.> SRE : consults
+A5 .down.> VM : consults
+A6 .down.> RG : consults\n(if above blast-radius threshold)
+A7 .down.> PO : consults
+A1 .down.> ES : informs
+A10 .down.> ES : informs
+
+note bottom of IC
+  Incident Commander is Accountable
+  for declaration, executive
+  reporting, closure, and review,
+  but never for the underlying
+  technical, fraud, or provider
+  decisions. Those stay with the
+  named functional lead.
+end note
+
+@enduml

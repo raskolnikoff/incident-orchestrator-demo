@@ -1,0 +1,7 @@
+campaign_id,name,region,start_utc,end_utc,channel,expected_traffic_uplift_pct,evidence_id,notes
+CMP-2026-041,Summer Flash Sale,NA,2026-07-30T10:00:00Z,2026-07-30T16:00:00Z,email+push+social,45,CAMPAIGN-001,Primary campaign driving incident-day traffic increase
+CMP-2026-041,Summer Flash Sale,EU,2026-07-30T10:00:00Z,2026-07-30T16:00:00Z,email+push+social,40,CAMPAIGN-001,Same campaign EU send wave
+CMP-2026-041,Summer Flash Sale,APAC,2026-07-30T12:00:00Z,2026-07-30T14:00:00Z,social,15,CAMPAIGN-001,Smaller regional send with later local-morning timing
+CMP-2026-038,Loyalty Member Early Access,NA,2026-07-29T00:00:00Z,2026-08-02T23:59:59Z,email,8,CAMPAIGN-001,Ongoing background promotion unrelated to the incident window
+CMP-2026-039,APAC Mobile App Push Week,APAC,2026-07-27T00:00:00Z,2026-08-03T23:59:59Z,push,12,CAMPAIGN-001,Ongoing background promotion
+CMP-2026-042,Back-to-School Teaser,EU,2026-07-31T00:00:00Z,2026-08-05T23:59:59Z,email,5,CAMPAIGN-001,Scheduled after the incident window; included for completeness

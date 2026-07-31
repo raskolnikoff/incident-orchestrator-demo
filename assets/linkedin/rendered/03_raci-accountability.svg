@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Who decides what: the LLM drafts and recommends but is never the accountable role. Incident Commander, SRE Lead, Fraud Operations Lead, and Communications Lead are each accountable for named activities. Risk and Governance is consulted only. One named human owns every decision.">
+  <title>Who decides what: RACI and accountability</title>
+
+  <defs>
+    <marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+    <g id="synthesisIcon3" stroke="#1D4ED8" stroke-width="2.5" fill="#BFDBFE">
+      <line x1="-20" y1="14" x2="0" y2="-16" stroke-linecap="round"/>
+      <line x1="20" y1="14" x2="0" y2="-16" stroke-linecap="round"/>
+      <line x1="-20" y1="14" x2="20" y2="14" stroke-linecap="round"/>
+      <circle cx="0" cy="-16" r="7"/>
+      <circle cx="-20" cy="14" r="7"/>
+      <circle cx="20" cy="14" r="7"/>
+    </g>
+    <g id="personIcon3">
+      <circle cx="0" cy="-15" r="13"/>
+      <path d="M -24,26 C -24,2 -13,-9 0,-9 C 13,-9 24,2 24,26 Z"/>
+    </g>
+  </defs>
+
+  <style>
+    .eyebrow3 { font: 600 18px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 2px; fill: #6B7280; }
+    .title3   { font: 700 46px/1.15 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #111827; }
+    .tag3     { font: 700 13px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 1px; }
+    .llmTitle3 { font: 700 26px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #1E3A8A; text-anchor: middle; }
+    .llmSub3   { font: 500 16px/1.4 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #374151; text-anchor: middle; }
+    .neverTag3 { font: 700 12.5px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #B91C1C; text-anchor: middle; letter-spacing: 0.2px; }
+    .roleTitle3 { font: 700 17px/1.3 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #1F2937; text-anchor: middle; }
+    .roleStatus3 { font: 600 14px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; }
+    .arrowLabel3 { font: 600 italic 15px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #6B7280; text-anchor: middle; }
+    .legend3  { font: 500 15px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #6B7280; }
+    .punch3   { font: 700 27px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #78350F; text-anchor: middle; }
+    .footer3  { font: 500 16px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #9CA3AF; }
+  </style>
+
+  <rect x="0" y="0" width="1600" height="900" fill="#FFFFFF"/>
+
+    <text x="64" y="72" class="eyebrow3">OPERATIONAL INCIDENT ORCHESTRATION FRAMEWORK</text>
+  <text x="64" y="132" class="title3">Who decides what: RACI and accountability</text>
+  <line x1="64" y1="172" x2="1536" y2="172" stroke="#E5E7EB" stroke-width="2"/>
+
+    <rect x="64" y="260" width="330" height="330" rx="18" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2"/>
+  <g transform="translate(229,360)"><use href="#synthesisIcon3"/></g>
+  <text x="229" y="424" class="llmTitle3">LLM</text>
+  <text x="229" y="456" class="llmSub3">Drafts &amp; recommends</text>
+  <rect x="89" y="486" width="280" height="34" rx="17" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5"/>
+  <text x="229" y="508" class="neverTag3">NEVER THE ACCOUNTABLE OWNER</text>
+
+    <line x1="404" y1="425" x2="472" y2="425" stroke="#374151" stroke-width="3" marker-end="url(#arrow3)"/>
+  <text x="438" y="400" class="arrowLabel3">recommends to</text>
+
+      <g transform="translate(560,360)">
+    <circle r="42" fill="#FFFBEB" stroke="#F59E0B" stroke-width="3"/>
+    <g fill="#92400E"><use href="#personIcon3"/></g>
+    <circle cx="30" cy="-30" r="15" fill="#F59E0B"/>
+    <text x="30" y="-25" text-anchor="middle" class="roleStatus3" fill="#FFFBEB">A</text>
+  </g>
+  <text x="560" y="440" class="roleTitle3">Incident</text>
+  <text x="560" y="461" class="roleTitle3">Commander</text>
+  <text x="560" y="488" class="roleStatus3" fill="#B45309">Accountable</text>
+
+    <g transform="translate(790,360)">
+    <circle r="42" fill="#FFFBEB" stroke="#F59E0B" stroke-width="3"/>
+    <g fill="#92400E"><use href="#personIcon3"/></g>
+    <circle cx="30" cy="-30" r="15" fill="#F59E0B"/>
+    <text x="30" y="-25" text-anchor="middle" class="roleStatus3" fill="#FFFBEB">A</text>
+  </g>
+  <text x="790" y="440" class="roleTitle3">SRE Lead</text>
+  <text x="790" y="488" class="roleStatus3" fill="#B45309">Accountable</text>
+
+    <g transform="translate(1000,360)">
+    <circle r="42" fill="#FFFBEB" stroke="#F59E0B" stroke-width="3"/>
+    <g fill="#92400E"><use href="#personIcon3"/></g>
+    <circle cx="30" cy="-30" r="15" fill="#F59E0B"/>
+    <text x="30" y="-25" text-anchor="middle" class="roleStatus3" fill="#FFFBEB">A</text>
+  </g>
+  <text x="1000" y="440" class="roleTitle3">Fraud Ops</text>
+  <text x="1000" y="461" class="roleTitle3">Lead</text>
+  <text x="1000" y="488" class="roleStatus3" fill="#B45309">Accountable</text>
+
+    <g transform="translate(1210,360)">
+    <circle r="42" fill="#FFFBEB" stroke="#F59E0B" stroke-width="3"/>
+    <g fill="#92400E"><use href="#personIcon3"/></g>
+    <circle cx="30" cy="-30" r="15" fill="#F59E0B"/>
+    <text x="30" y="-25" text-anchor="middle" class="roleStatus3" fill="#FFFBEB">A</text>
+  </g>
+  <text x="1210" y="440" class="roleTitle3">Comms Lead</text>
+  <text x="1210" y="488" class="roleStatus3" fill="#B45309">Accountable</text>
+
+    <g transform="translate(1420,360)">
+    <circle r="42" fill="#FFFFFF" stroke="#A0AEC0" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <g fill="#718096"><use href="#personIcon3"/></g>
+    <circle cx="30" cy="-30" r="15" fill="#FFFFFF" stroke="#A0AEC0" stroke-width="2"/>
+    <text x="30" y="-25" text-anchor="middle" class="roleStatus3" fill="#718096">C</text>
+  </g>
+  <text x="1420" y="440" class="roleTitle3" fill="#4B5563">Risk &amp;</text>
+  <text x="1420" y="461" class="roleTitle3" fill="#4B5563">Governance</text>
+  <text x="1420" y="488" class="roleStatus3" fill="#718096">Consulted only</text>
+
+    <g transform="translate(560,538)">
+    <circle r="8" fill="#F59E0B"/>
+  </g>
+  <text x="580" y="544" class="legend3">Accountable, one named owner per activity</text>
+  <g transform="translate(1000,538)">
+    <circle r="8" fill="#FFFFFF" stroke="#A0AEC0" stroke-width="2" stroke-dasharray="3 3"/>
+  </g>
+  <text x="1020" y="544" class="legend3">Consulted or informed only</text>
+
+    <rect x="64" y="628" width="1472" height="108" rx="16" fill="#FFFBEB" stroke="#F59E0B" stroke-width="2"/>
+  <text x="800" y="670" class="punch3">One named human owns every decision.</text>
+  <text x="800" y="704" class="punch3">Never the model.</text>
+
+    <line x1="64" y1="800" x2="1536" y2="800" stroke="#E5E7EB" stroke-width="1.5"/>
+  <text x="64" y="836" class="footer3">Illustrative framework diagram · synthetic example, not a real incident</text>
+  <text x="1536" y="836" text-anchor="end" class="footer3">3 / 3</text>
+</svg>

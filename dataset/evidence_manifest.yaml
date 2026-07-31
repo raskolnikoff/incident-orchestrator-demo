@@ -1,0 +1,533 @@
+# Evidence Manifest
+# Operational Incident Orchestration Framework (OIOF) - synthetic demo repository
+#
+# This file is the authoritative catalog of evidence for the fictional
+# "Intermittent Checkout Authorization Degradation" incident at the fictional
+# company Northstar Commerce. Every meaningful claim in prompts/, examples/,
+# and docs/ must cite an `id` from this file. scripts/validate_dataset.py and
+# tests/test_traceability.py check that every citation resolves to an id here
+# and that every id here resolves to real records in dataset/.
+#
+# Format notes (kept deliberately simple so it can be parsed with the Python
+# standard library only - see scripts/_manifest_lite.py):
+#   - Top-level key `evidence` is a flat list of records.
+#   - Every record is a flat mapping: no nested maps, only scalars and
+#     single-line inline lists like [NA, EU, APAC].
+#   - Strings that contain a colon are double-quoted.
+#
+# Reliability ratings:
+#   high   - structured, machine-generated, directly queryable
+#   medium - human-authored operational record, or self-reported but specific
+#   low    - unverified, delayed, sparse/sampled, or informal/assumption-laden
+
+schema_version: "1.0"
+incident_id: "INC-2026-0730-CHECKOUT"
+generated_by: "scripts/generate_dataset.py (seed=42)"
+
+evidence:
+  # --- application_logs.jsonl -------------------------------------------
+  - id: LOG-APP-001
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "Baseline-day (2026-07-29) application logs across checkout-api, payment-orchestration, and fraud-decision in all regions, before the release, fraud-rule change, and CDN change. Control group for normal operating behavior."
+    record_count: 40
+    time_range_start: "2026-07-29T00:10:21Z"
+    time_range_end: "2026-07-29T23:54:24Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-002
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "payment-orchestration logs for requests routed to ProviderAlpha in NA and EU during the 11:00-15:00 UTC window on the incident day. Dominated by TIMEOUT and NETWORK_ERROR entries."
+    record_count: 45
+    time_range_start: "2026-07-30T11:05:40Z"
+    time_range_end: "2026-07-30T14:43:37Z"
+    regions: [NA, EU]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-003
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "payment-orchestration logs for requests routed to ProviderBeta across all regions on the incident day. Healthy control group used to contrast against LOG-APP-002."
+    record_count: 35
+    time_range_start: "2026-07-30T01:39:17Z"
+    time_range_end: "2026-07-30T23:31:56Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-004
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "fraud-decision logs for EU from 09:30 UTC onward (after fraud rule set FR-2026-118 was deployed). Elevated DECLINE_FRAUD entries citing velocity-threshold rejections."
+    record_count: 30
+    time_range_start: "2026-07-30T10:32:07Z"
+    time_range_end: "2026-07-30T23:54:42Z"
+    regions: [EU]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-005
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "fraud-decision logs for EU before 09:30 UTC, plus NA and APAC fraud-decision logs across the full incident day. Control group for LOG-APP-004."
+    record_count: 30
+    time_range_start: "2026-07-30T00:22:06Z"
+    time_range_end: "2026-07-30T22:53:57Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-006
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "checkout-api and promotion-service logs from APAC (majority) and NA (minority) from 07:15 UTC onward, after the checkout-config CDN cache TTL change. Elevated CONFIG_MISMATCH and VALIDATION_ERROR entries."
+    record_count: 28
+    time_range_start: "2026-07-30T07:36:27Z"
+    time_range_end: "2026-07-30T22:41:08Z"
+    regions: [NA, APAC]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-007
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "checkout-api logs on app_version 3.12.0 across all regions from 09:00 UTC onward (post full-fleet rollout). Elevated CHECKOUT_RETRY_EXCEEDED entries indicating repeated client-side retry loops."
+    record_count: 32
+    time_range_start: "2026-07-30T09:16:52Z"
+    time_range_end: "2026-07-30T22:46:08Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-008
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "checkout-api logs on app_version 3.11.4 (pre-release stragglers and control traffic) across the incident day. Control group for LOG-APP-007."
+    record_count: 25
+    time_range_start: "2026-07-30T00:23:23Z"
+    time_range_end: "2026-07-30T22:52:54Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-009
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "web-storefront and mobile-app informational logs across all regions and the full incident day, reflecting general (mostly campaign-driven) traffic volume rather than checkout failures."
+    record_count: 30
+    time_range_start: "2026-07-30T01:00:59Z"
+    time_range_end: "2026-07-30T23:56:03Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_application_log
+    known_limitations: "none"
+  - id: LOG-APP-010
+    category: application_logs
+    source_file: dataset/application_logs.jsonl
+    description: "APAC checkout-api log volume for the 13:00-14:00 UTC window is anomalously sparse (5 records vs. an expected ~15 based on surrounding hours) and every record is flagged sampled=true. Suspected log-pipeline sampling gap; treat absence of errors in this window as inconclusive, not as evidence of health."
+    record_count: 5
+    time_range_start: "2026-07-30T13:01:42Z"
+    time_range_end: "2026-07-30T13:54:07Z"
+    regions: [APAC]
+    reliability: low
+    collection_method: structured_application_log_sampled
+    known_limitations: "known coverage gap: sparse and explicitly sampled, do not infer absence of errors"
+
+  # --- api_gateway_logs.csv ------------------------------------------
+  - id: GW-API-001
+    category: api_gateway_logs
+    source_file: dataset/api_gateway_logs.csv
+    description: "Baseline-day (2026-07-29) API gateway access logs across all regions. Control group for CDN cache_status behavior."
+    record_count: 30
+    time_range_start: "2026-07-29T00:33:22Z"
+    time_range_end: "2026-07-29T23:12:34Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_gateway_log
+    known_limitations: "none"
+  - id: GW-API-002
+    category: api_gateway_logs
+    source_file: dataset/api_gateway_logs.csv
+    description: "/api/checkout/config requests served from three specific APAC edge nodes (edge-apac-01/02/03) from 07:20 UTC onward, showing a high proportion of cache_status=STALE responses following the CDN configuration change."
+    record_count: 30
+    time_range_start: "2026-07-30T07:20:12Z"
+    time_range_end: "2026-07-30T23:58:06Z"
+    regions: [APAC]
+    reliability: high
+    collection_method: structured_gateway_log
+    known_limitations: "limited to a 3-edge-node subset, not necessarily representative of all APAC edges"
+  - id: GW-API-003
+    category: api_gateway_logs
+    source_file: dataset/api_gateway_logs.csv
+    description: "/api/checkout/config requests served from one NA edge node (edge-na-04) from 07:46 UTC onward, showing an intermittent (roughly 50%) rate of cache_status=STALE responses - a smaller, partial echo of GW-API-002."
+    record_count: 15
+    time_range_start: "2026-07-30T07:46:53Z"
+    time_range_end: "2026-07-30T22:36:49Z"
+    regions: [NA]
+    reliability: high
+    collection_method: structured_gateway_log
+    known_limitations: "single edge node; does not establish whether other NA edges were affected"
+  - id: GW-API-004
+    category: api_gateway_logs
+    source_file: dataset/api_gateway_logs.csv
+    description: "/api/checkout/config requests served from EU edge nodes across the full incident day, showing normal HIT/MISS cache behavior with no STALE responses observed. Control group for GW-API-002 and GW-API-003."
+    record_count: 25
+    time_range_start: "2026-07-30T01:14:12Z"
+    time_range_end: "2026-07-30T21:57:46Z"
+    regions: [EU]
+    reliability: high
+    collection_method: structured_gateway_log
+    known_limitations: "none"
+  - id: GW-API-005
+    category: api_gateway_logs
+    source_file: dataset/api_gateway_logs.csv
+    description: "General checkout-api gateway traffic across all regions during the campaign window (10:00-20:00 UTC), including a subset of elevated-latency 503 responses consistent with capacity pressure during the traffic increase."
+    record_count: 50
+    time_range_start: "2026-07-30T10:49:36Z"
+    time_range_end: "2026-07-30T19:39:54Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_gateway_log
+    known_limitations: "none"
+  - id: GW-API-006
+    category: api_gateway_logs
+    source_file: dataset/api_gateway_logs.csv
+    description: "General gateway traffic across all regions before the campaign start (00:00-10:00 UTC) on the incident day. Pre-campaign, largely pre-release control window."
+    record_count: 30
+    time_range_start: "2026-07-30T00:00:24Z"
+    time_range_end: "2026-07-30T09:11:15Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: structured_gateway_log
+    known_limitations: "none"
+
+  # --- hourly_kpis.csv -------------------------------------------------
+  - id: KPI-HOURLY-001
+    category: hourly_kpis
+    source_file: dataset/hourly_kpis.csv
+    description: "Baseline-day (2026-07-29) hourly checkout KPIs for all three regions. Baseline authorization success rate approximately 97.1% in every region."
+    record_count: 72
+    time_range_start: "2026-07-29T00:00:00Z"
+    time_range_end: "2026-07-29T23:00:00Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "hourly aggregation can mask sub-hourly and payment-method-level variation"
+  - id: KPI-HOURLY-002
+    category: hourly_kpis
+    source_file: dataset/hourly_kpis.csv
+    description: "Incident-day (2026-07-30) hourly checkout KPIs for NA. Authorization success rate falls to a minimum of approximately 87.9% (11:00-16:00 window) against a day average of 95.9%."
+    record_count: 24
+    time_range_start: "2026-07-30T00:00:00Z"
+    time_range_end: "2026-07-30T23:00:00Z"
+    regions: [NA]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "region-level aggregation masks payment-method-level differences; see PAY-METRIC-* for that detail"
+  - id: KPI-HOURLY-003
+    category: hourly_kpis
+    source_file: dataset/hourly_kpis.csv
+    description: "Incident-day (2026-07-30) hourly checkout KPIs for EU. Authorization success rate falls to a minimum of approximately 85.4% (11:00-16:00 window) against a day average of 94.3%, the largest regional decline of the three regions."
+    record_count: 24
+    time_range_start: "2026-07-30T00:00:00Z"
+    time_range_end: "2026-07-30T23:00:00Z"
+    regions: [EU]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "region-level aggregation masks payment-method-level differences; see PAY-METRIC-* for that detail"
+  - id: KPI-HOURLY-004
+    category: hourly_kpis
+    source_file: dataset/hourly_kpis.csv
+    description: "Incident-day (2026-07-30) hourly checkout KPIs for APAC. Authorization success rate falls to a minimum of approximately 94.3% against a day average of 95.8% - a smaller decline than NA or EU."
+    record_count: 24
+    time_range_start: "2026-07-30T00:00:00Z"
+    time_range_end: "2026-07-30T23:00:00Z"
+    regions: [APAC]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "region-level aggregation masks payment-method-level differences; see PAY-METRIC-* for that detail"
+  - id: KPI-HOURLY-005
+    category: hourly_kpis
+    source_file: dataset/hourly_kpis.csv
+    description: "Global (all-region) rollup derived by summing KPI-HOURLY-002/003/004. Included specifically because a naive global-only view understates the EU decline (masked by APAC's smaller decline) - illustrates how aggregate KPIs can produce misleading regional conclusions."
+    record_count: null
+    time_range_start: "2026-07-30T00:00:00Z"
+    time_range_end: "2026-07-30T23:00:00Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: derived_aggregate
+    known_limitations: "derived, not a raw source; recompute from KPI-HOURLY-002/003/004 rather than citing in isolation"
+  - id: KPI-HOURLY-006
+    category: hourly_kpis
+    source_file: dataset/hourly_kpis.csv
+    description: "campaign_active flag column cross-referenced against sessions volume for NA and EU, 10:00-16:00 UTC, showing a session-volume increase of roughly 35-65% coincident with the campaign window. Used to test how much of the failure-rate movement the campaign alone explains."
+    record_count: null
+    time_range_start: "2026-07-30T10:00:00Z"
+    time_range_end: "2026-07-30T16:00:00Z"
+    regions: [NA, EU]
+    reliability: high
+    collection_method: derived_aggregate
+    known_limitations: "derived overlay on KPI-HOURLY-002/003, not an independent raw source"
+
+  # --- payment_metrics.csv ----------------------------------------------
+  - id: PAY-METRIC-001
+    category: payment_metrics
+    source_file: dataset/payment_metrics.csv
+    description: "Two-hour payment-method buckets for NA and EU transactions routed to ProviderAlpha, 10:00-16:00 UTC. Aggregate: 1,853 attempts, 316 timeouts (17.1%), 169 fraud declines (9.1%), 1,288 authorized (69.5%). Note this window overlaps both the provider-stress and EU fraud-rule periods, so timeout and fraud-decline effects are co-mingled here."
+    record_count: 30
+    time_range_start: "2026-07-30T10:00:00Z"
+    time_range_end: "2026-07-30T14:00:00Z"
+    regions: [NA, EU]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "co-mingles the provider-timeout and fraud-decline signals; cannot be used alone to apportion cause between H1 and H3"
+  - id: PAY-METRIC-002
+    category: payment_metrics
+    source_file: dataset/payment_metrics.csv
+    description: "Two-hour payment-method buckets for transactions routed to ProviderBeta, all times and regions observed (NA and APAC only - no EU payment method in this dataset routed a material volume to ProviderBeta). Healthy control: 0% observed timeout rate. Notably, EU checkout traffic in this dataset has no ProviderBeta fallback path, a routing concentration worth flagging independently of the incident."
+    record_count: 64
+    time_range_start: "2026-07-30T08:00:00Z"
+    time_range_end: "2026-07-30T22:00:00Z"
+    regions: [NA, APAC]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "does not include EU; EU ProviderBeta volume was negligible to absent in the observed period"
+  - id: PAY-METRIC-003
+    category: payment_metrics
+    source_file: dataset/payment_metrics.csv
+    description: "EU ProviderAlpha buckets from 16:00 UTC onward, after the provider-stress window has receded. Isolates the fraud-rule effect: 822 attempts, 12 timeouts (1.5%, near baseline), 109 fraud declines (13.3%), 677 authorized (82.4%). Because timeouts have returned to baseline here, this is the cleanest single-cause view of the EU fraud-rule impact (H3)."
+    record_count: 24
+    time_range_start: "2026-07-30T16:00:00Z"
+    time_range_end: "2026-07-30T22:00:00Z"
+    regions: [EU]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "covers only the post-16:00 tail; does not describe the 09:30-16:00 co-mingled period"
+  - id: PAY-METRIC-004
+    category: payment_metrics
+    source_file: dataset/payment_metrics.csv
+    description: "NA ProviderAlpha buckets from 16:00 UTC onward (after provider stress recedes). Control/comparison group for PAY-METRIC-003: tests whether the fraud-decline elevation is EU-specific or provider-wide. No comparable APAC ProviderAlpha volume was observed in this dataset."
+    record_count: 16
+    time_range_start: "2026-07-30T16:00:00Z"
+    time_range_end: "2026-07-30T22:00:00Z"
+    regions: [NA]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "no APAC ProviderAlpha comparison volume present in the observed period"
+  - id: PAY-METRIC-005
+    category: payment_metrics
+    source_file: dataset/payment_metrics.csv
+    description: "Pre-event buckets (00:00-08:00 UTC) on the incident day, before the CDN change, release rollout, fraud-rule change, and campaign. Same-day, pre-event baseline for all regions and payment methods."
+    record_count: 72
+    time_range_start: "2026-07-30T00:00:00Z"
+    time_range_end: "2026-07-30T06:00:00Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: aggregated_metric
+    known_limitations: "none"
+  - id: PAY-METRIC-006
+    category: payment_metrics
+    source_file: dataset/payment_metrics.csv
+    description: "NA and EU ProviderAlpha traffic in the narrow 08:00-10:00 UTC transition bucket - after the release canary/rollout but before the provider-stress and fraud-rule windows fully manifest. A short, ambiguous transitional slice."
+    record_count: 10
+    time_range_start: "2026-07-30T08:00:00Z"
+    time_range_end: "2026-07-30T08:00:00Z"
+    regions: [NA, EU]
+    reliability: medium
+    collection_method: aggregated_metric
+    known_limitations: "single 2-hour bucket; small sample per payment method"
+  - id: PAY-METRIC-008
+    category: payment_metrics
+    source_file: dataset/payment_metrics.csv
+    description: "Global (all-region, all-method) rollup of the full incident day, derived by summing all payment_metrics.csv rows. Included to show that a single global authorization-rate number obscures which provider, region, and time window actually drove the decline."
+    record_count: null
+    time_range_start: "2026-07-30T00:00:00Z"
+    time_range_end: "2026-07-30T22:00:00Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: derived_aggregate
+    known_limitations: "derived, not a raw source; masks the region/provider/time breakdown needed for root-cause work"
+
+  # --- customer_feedback.csv --------------------------------------------
+  - id: CS-FEEDBACK-001
+    category: customer_feedback
+    source_file: dataset/customer_feedback.csv
+    description: "NA customer reports describing declined-card checkout failures, 13:53-17:49 UTC, reported within 3 hours of purchase attempt."
+    record_count: 8
+    time_range_start: "2026-07-30T13:53:53Z"
+    time_range_end: "2026-07-30T17:49:49Z"
+    regions: [NA]
+    reliability: medium
+    collection_method: self_reported
+    known_limitations: "self-reported symptom category; underlying technical cause not verified by the reporter"
+  - id: CS-FEEDBACK-002
+    category: customer_feedback
+    source_file: dataset/customer_feedback.csv
+    description: "EU customer reports describing declined-card checkout failures with fraud-like symptoms (e.g. 'contact your bank' messaging on a card the customer states is in normal use), 11:04-19:32 UTC."
+    record_count: 8
+    time_range_start: "2026-07-30T11:04:03Z"
+    time_range_end: "2026-07-30T19:32:49Z"
+    regions: [EU]
+    reliability: medium
+    collection_method: self_reported
+    known_limitations: "self-reported; cannot confirm from the complaint text alone whether the decline was fraud-rule-driven or issuer-driven"
+  - id: CS-FEEDBACK-003
+    category: customer_feedback
+    source_file: dataset/customer_feedback.csv
+    description: "APAC customer reports describing checkout page/config errors and stale-looking promo content, 08:32-20:25 UTC."
+    record_count: 7
+    time_range_start: "2026-07-30T08:32:58Z"
+    time_range_end: "2026-07-30T20:25:34Z"
+    regions: [APAC]
+    reliability: medium
+    collection_method: self_reported
+    known_limitations: "self-reported; symptom description is consistent with, but does not prove, the CDN staleness pattern in GW-API-002"
+  - id: CS-FEEDBACK-004
+    category: customer_feedback
+    source_file: dataset/customer_feedback.csv
+    description: "Cross-region customer reports describing slow checkout and timeout-like symptoms, 10:54-19:07 UTC."
+    record_count: 8
+    time_range_start: "2026-07-30T10:54:15Z"
+    time_range_end: "2026-07-30T19:07:21Z"
+    regions: [NA, EU, APAC]
+    reliability: medium
+    collection_method: self_reported
+    known_limitations: "self-reported; 'slow' is subjective and not tied to a measured latency value"
+  - id: CS-FEEDBACK-005
+    category: customer_feedback
+    source_file: dataset/customer_feedback.csv
+    description: "Delayed customer reports filed 6-18 hours after the estimated failure event. Recall accuracy degrades with delay; treat symptom timing in these records as approximate."
+    record_count: 5
+    time_range_start: "2026-07-30T12:26:38Z"
+    time_range_end: "2026-07-30T14:49:37Z"
+    regions: [NA, EU, APAC]
+    reliability: low
+    collection_method: self_reported_delayed
+    known_limitations: "reporting delay of 6-18 hours; timing and detail may not be precise"
+  - id: CS-FEEDBACK-006
+    category: customer_feedback
+    source_file: dataset/customer_feedback.csv
+    description: "Reports with mixed or ambiguous symptoms (e.g. failed then succeeded on retry, cause unclear to the customer). Cannot be cleanly mapped to a single hypothesis."
+    record_count: 4
+    time_range_start: "2026-07-30T09:38:14Z"
+    time_range_end: "2026-07-30T21:06:33Z"
+    regions: [NA, EU, APAC]
+    reliability: low
+    collection_method: self_reported
+    known_limitations: "symptom description too ambiguous to attribute to a specific failure mode"
+
+  # --- narrative / document evidence -------------------------------------
+  - id: REL-001
+    category: release_record
+    source_file: dataset/release_notes.md
+    description: "Deployment record for checkout-api 3.12.0: canary in NA at 08:00 UTC, full-fleet rollout at 09:00 UTC on the incident day. Documents an intentional change to checkout submission retry logic."
+    record_count: null
+    time_range_start: "2026-07-30T08:00:00Z"
+    time_range_end: "2026-07-30T09:00:00Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: authoritative_change_record
+    known_limitations: "documents intended change only; does not itself prove the observed CHECKOUT_RETRY_EXCEEDED behavior was caused by this release"
+  - id: CDN-001
+    category: change_record
+    source_file: dataset/release_notes.md
+    description: "Change record for a checkout-config CDN cache TTL adjustment at 07:15 UTC on the incident day, applied to a subset of edge nodes as part of a routine cache-policy rollout."
+    record_count: null
+    time_range_start: "2026-07-30T07:15:00Z"
+    time_range_end: "2026-07-30T07:15:00Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: authoritative_change_record
+    known_limitations: "does not itself confirm which edge nodes actually served stale content; see GW-API-002/003 for observed effect"
+  - id: FRAUD-001
+    category: change_record
+    source_file: dataset/fraud_rule_change.md
+    description: "Change record for fraud rule set FR-2026-118, tightening velocity-based checks, deployed to EU only at 09:30 UTC on the incident day."
+    record_count: null
+    time_range_start: "2026-07-30T09:30:00Z"
+    time_range_end: "2026-07-30T09:30:00Z"
+    regions: [EU]
+    reliability: high
+    collection_method: authoritative_change_record
+    known_limitations: "documents intended change only; see LOG-APP-004 and PAY-METRIC-003 for observed effect"
+  - id: VENDOR-001
+    category: vendor_communication
+    source_file: dataset/vendor_email.md
+    description: "Email from ProviderAlpha's status desk acknowledging 'elevated processing times for a subset of transactions' in an unspecified time window, declining to confirm root cause or scope pending internal investigation."
+    record_count: null
+    time_range_start: null
+    time_range_end: null
+    regions: null
+    reliability: medium
+    collection_method: external_vendor_communication
+    known_limitations: "vendor language is deliberately non-specific about scope, timing, and cause; cannot be treated as a confirmed root-cause statement"
+  - id: CHAT-001
+    category: internal_communication
+    source_file: dataset/internal_chat.md
+    description: "Engineering incident channel excerpt in which an engineer states with high confidence, ahead of data confirmation, that the checkout-api release is 'obviously' the cause."
+    record_count: null
+    time_range_start: null
+    time_range_end: null
+    regions: null
+    reliability: low
+    collection_method: internal_chat_transcript
+    known_limitations: "informal, unverified assertion stated with more confidence than the evidence available at the time supported"
+  - id: CHAT-002
+    category: internal_communication
+    source_file: dataset/internal_chat.md
+    description: "Fraud operations channel excerpt in which a team member asserts the fraud-rule change 'can't be it' because it only affects a small percentage of traffic, without checking EU-specific figures."
+    record_count: null
+    time_range_start: null
+    time_range_end: null
+    regions: [EU]
+    reliability: low
+    collection_method: internal_chat_transcript
+    known_limitations: "informal, unverified assertion; contradicted in part by LOG-APP-004 and PAY-METRIC-003"
+  - id: CHAT-003
+    category: internal_communication
+    source_file: dataset/internal_chat.md
+    description: "Executive/leadership channel excerpt in which a stakeholder asks for a revenue-impact number before any authorization-shortfall or order-value analysis has been completed."
+    record_count: null
+    time_range_start: null
+    time_range_end: null
+    regions: null
+    reliability: low
+    collection_method: internal_chat_transcript
+    known_limitations: "reflects a request for a figure the evidence available at the time could not yet support"
+  - id: CAMPAIGN-001
+    category: marketing_schedule
+    source_file: dataset/campaign_schedule.csv
+    description: "Marketing campaign schedule showing the 'Summer Flash Sale' campaign active in NA and EU from 10:00-16:00 UTC on the incident day, plus two smaller ongoing regional promotions."
+    record_count: 6
+    time_range_start: "2026-07-30T10:00:00Z"
+    time_range_end: "2026-07-30T16:00:00Z"
+    regions: [NA, EU, APAC]
+    reliability: high
+    collection_method: authoritative_schedule_record
+    known_limitations: "documents planned campaign windows only; actual traffic effect must be read from KPI-HOURLY-006"
+  - id: HIST-001
+    category: incident_history
+    source_file: dataset/incident_history.md
+    description: "Summary of three prior Northstar Commerce incidents in the last 12 months, included for pattern context: two were resolved as payment-provider-side degradations, one as a caching regression. None involved a fraud-rule change."
+    record_count: null
+    time_range_start: null
+    time_range_end: null
+    regions: [NA, EU, APAC]
+    reliability: medium
+    collection_method: authoritative_change_record
+    known_limitations: "historical base rates are informative context, not evidence about this incident's cause"
+  - id: PROC-001
+    category: operating_procedure
+    source_file: dataset/operating_procedure.md
+    description: "Northstar Commerce incident management operating procedure: severity definitions, escalation thresholds, and role responsibilities referenced by the Decision Matrix and RACI."
+    record_count: null
+    time_range_start: null
+    time_range_end: null
+    regions: null
+    reliability: high
+    collection_method: authoritative_policy_document
+    known_limitations: "none"

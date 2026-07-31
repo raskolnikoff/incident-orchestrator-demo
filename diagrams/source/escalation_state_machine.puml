@@ -1,0 +1,58 @@
+@startuml escalation_state_machine
+title OIOF — Escalation State Machine
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #4A5568
+skinparam state {
+  BackgroundColor #F7FAFC
+  BorderColor #4A5568
+  FontColor #1A202C
+}
+
+state "Decision Pending" as DecisionPending
+
+[*] --> Detected : alert threshold breach\nor manual report
+
+Detected --> Triaged : deterministic evidence\ncollection + validation complete
+
+Triaged --> Investigating : Orchestrator analysis (Prompt 01)\n+ Independent challenge (Prompt 02)\nunderway
+
+Investigating --> DecisionPending : Decision Matrix drafted,\nawaiting named human owner(s)
+
+DecisionPending --> Contained : decision(s) approved\nand executed
+
+Contained --> Monitoring : reversible actions in place,\nauth-rate trend re-checked
+
+state "Closure Pending" as ClosurePending
+Monitoring --> ClosurePending : deterministic closure criteria met:\nauth rate within 1pt of baseline for 2+ consecutive hours,\nall Decision Matrix rows terminal, and review scheduled
+ClosurePending --> Resolved : Incident Commander explicitly\napproves closure
+ClosurePending --> Investigating : Incident Commander rejects closure\nor new evidence arrives
+
+Monitoring --> Investigating : new evidence contradicts\ncurrent hypothesis set
+
+Resolved --> Review : begin scheduled post-incident review
+
+Review --> [*]
+
+Triaged --> Escalated : severity re-assessed upward
+Investigating --> Escalated : approval deadline passed\nwithout decision
+DecisionPending --> Escalated : customer_risk = high OR\nreversibility = low
+Escalated --> DecisionPending : Incident Commander +\nExecutive Sponsor engaged
+
+note right of Escalated
+  Escalation never resolves itself
+  automatically. A human (Incident
+  Commander or Executive Sponsor)
+  must act to leave this state.
+end note
+
+note bottom of Resolved
+  Closure criteria per PROC-001.
+  Always a human (Incident
+  Commander) decision — never
+  automatic.
+end note
+
+@enduml

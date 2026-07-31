@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/oiof/schemas/finding.schema.json",
+  "title": "Finding",
+  "description": "A single classified claim produced during incident orchestration (prompts/01_incident_orchestrator.md, section 4/6). Every finding must be typed and evidence-cited so that facts, inferences, and hypotheses remain distinguishable downstream.",
+  "type": "object",
+  "required": ["finding_id", "claim_type", "statement", "evidence_ids", "confidence"],
+  "additionalProperties": false,
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "description": "Stable identifier for this finding, e.g. F-001."
+    },
+    "claim_type": {
+      "type": "string",
+      "enum": [
+        "confirmed_fact",
+        "evidence_supported_inference",
+        "competing_hypothesis",
+        "unresolved_question",
+        "missing_evidence",
+        "contradiction"
+      ],
+      "description": "Which of the seven required orchestrator categories (A-F; decisions requiring approval are modeled separately, see decision_matrix.schema.json) this finding belongs to."
+    },
+    "statement": {
+      "type": "string",
+      "description": "The claim itself, in plain language."
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0,
+      "description": "Evidence IDs from evidence_manifest.yaml this finding rests on. May be empty only when claim_type is 'unresolved_question' or 'missing_evidence'."
+    },
+    "opposing_evidence_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "For competing_hypothesis or contradiction findings: evidence that weighs against the statement."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "confidence_rationale": {
+      "type": "string",
+      "description": "Why this confidence level, referencing the evidence_ids."
+    },
+    "region_scope": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["NA", "EU", "APAC"] }
+    },
+    "hypothesis_ref": {
+      "type": ["string", "null"],
+      "description": "For findings tied to a named hypothesis (e.g. H1-H4), the hypothesis identifier."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "claim_type": { "const": "confirmed_fact" } }
+      },
+      "then": {
+        "properties": { "evidence_ids": { "minItems": 1 } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "claim_type": { "const": "evidence_supported_inference" } }
+      },
+      "then": {
+        "properties": { "evidence_ids": { "minItems": 1 } }
+      }
+    }
+  ]
+}

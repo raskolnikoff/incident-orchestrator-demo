@@ -1,0 +1,94 @@
+# .gitignore for incident-orchestrator-demo
+#
+# This repository intentionally TRACKS several kinds of generated
+# output, because the portfolio value depends on them being visible
+# without a build step:
+#   - diagrams/rendered/*.svg, *.png   (PlantUML output)
+#   - assets/linkedin/rendered/*.svg   (carousel export)
+#   - dataset/*.jsonl, dataset/*.csv   (deterministic synthetic dataset)
+#   - dataset/source_checksums.sha256  (evidence integrity snapshot)
+# Do not add broad patterns (e.g. bare *.svg, *.png, *.csv, *.jsonl)
+# below — they would silently hide those files. Every pattern here is
+# scoped to local tooling/editor state, not project content.
+
+# --- macOS metadata ---------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# --- JetBrains (IDEA/PyCharm/etc.) ------------------------------------
+.idea/
+
+# --- VS Code -----------------------------------------------------------
+.vscode/
+*.code-workspace
+
+# --- Python bytecode / test & lint caches ------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+*.egg-info/
+
+# --- Virtual environments -----------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# --- Coverage / local reports --------------------------------------------
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.hypothesis/
+
+# --- Temporary files -----------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*~
+.~lock*
+
+# --- Local logs -----------------------------------------------------------
+*.log
+logs/
+
+# --- Secrets and environment files -----------------------------------------
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+credentials.json
+
+# --- PlantUML local install artifacts ---------------------------------------
+*.jar
+*.class
+plantuml.jar
+
+# --- Local AI-agent state (Claude Code, Codex, Cursor, Aider) -----------------
+.claude/
+.codex/
+.cursor/
+.aider*
+
+# --- Local-only exports and artifacts -----------------------------------------
+# Guards against ad hoc raster exports (e.g. following the
+# `rsvg-convert ... -o 01.png` example in assets/linkedin/README.md)
+# landing at the repo root instead of a tracked rendered/ directory.
+# Anchored to root (leading slash) so it never matches
+# diagrams/rendered/ or assets/linkedin/rendered/.
+/*.png
+/*.jpg
+/*.jpeg
+/*.pdf
+/exports/
+/local/

@@ -1,0 +1,60 @@
+@startuml framework_overview
+title OIOF — Framework Overview
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam defaultTextAlignment center
+skinparam ArrowColor #4A5568
+skinparam ArrowThickness 1.2
+skinparam rectangle {
+  BackgroundColor #F7FAFC
+  BorderColor #4A5568
+  FontColor #1A202C
+}
+skinparam note {
+  BackgroundColor #FFFDF0
+  BorderColor #D4B106
+}
+
+rectangle "Evidence Sources\n(logs, KPIs, metrics,\nfeedback, change records,\nvendor & internal comms)" as Sources
+rectangle "Evidence\nNormalization\n(schema validation,\nevidence-ID tagging)" as Normalize #E6F0FA
+rectangle "LLM Reasoning\n(Prompt 01 —\nOrchestrator)" as Reason #E9F5EC
+rectangle "Independent\nChallenge\n(Prompt 02)" as Challenge #FDF0E6
+rectangle "Human Decision\n(Decision Matrix +\napproval gates)" as Decide #FCE8E8
+rectangle "Controlled\nExecution\n(deterministic systems,\nreversible actions)" as Execute #E6F0FA
+rectangle "Audit Trail\n(evidence-linked,\nretained per PROC-001)" as Audit #F0EAF7
+
+Sources -right-> Normalize
+Normalize -right-> Reason
+Reason -right-> Challenge
+Challenge -right-> Decide
+Decide -right-> Execute
+Execute -right-> Audit
+
+Audit .up.> Sources : feeds post-incident\nreview & pattern context\n(e.g. HIST-001)
+
+note bottom of Reason
+  Fact / inference / hypothesis
+  separation enforced here.
+  Never the accountable
+  decision owner.
+end note
+
+note bottom of Decide
+  Every decision has a named
+  human owner. No autonomous
+  production, customer, or
+  vendor action.
+end note
+
+legend right
+  |= Stage |= Who / what is accountable |
+  | Evidence Normalization | Deterministic system |
+  | LLM Reasoning | LLM (advisory only) |
+  | Independent Challenge | LLM, fresh context (advisory only) |
+  | Human Decision | Named human role |
+  | Controlled Execution | Deterministic system, human-triggered |
+endlegend
+
+@enduml

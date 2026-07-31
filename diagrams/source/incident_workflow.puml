@@ -1,0 +1,61 @@
+@startuml incident_workflow
+title OIOF — Incident Workflow
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #4A5568
+skinparam activity {
+  BackgroundColor #F7FAFC
+  BorderColor #4A5568
+  DiamondBackgroundColor #FDF0E6
+  DiamondBorderColor #A0522D
+}
+skinparam note {
+  BackgroundColor #FFFDF0
+  BorderColor #D4B106
+}
+
+start
+:Alert or manual trigger\n(e.g. authorization-rate\nthreshold breach);
+:Deterministic evidence\ncollection + validation;
+
+repeat
+  if (Evidence set internally\nconsistent, single clear cause?) then (normal path)
+    :Orchestrator analysis\n(Prompt 01);
+    :Independent challenge\n(Prompt 02);
+    :Decision Matrix reviewed\nby named human owners;
+  else (ambiguity path —\nmultiple hypotheses,\ncontradictions present)
+    :Orchestrator analysis explicitly\npreserves competing hypotheses\n(H1..H4 style);
+    :Independent challenge\nstress-tests each hypothesis;
+    :Additional investigation\nworkstreams opened;
+    :Decision Matrix reviewed with\nexplicit confidence per option;
+  endif
+
+  if (Any decision customer_risk = high\nOR reversibility = low?) then (yes — escalation path)
+    :Escalate to Incident Commander\n+ Executive Sponsor per PROC-001;
+    :Joint sign-off required\nbefore execution;
+  else (no)
+  endif
+
+  :Approved decisions executed\nby deterministic tooling;
+  :Audit record appended;
+  :Re-check authorization metrics\nagainst regional baseline;
+repeat while (Closure criteria met?\n(auth rate within 1pt of baseline for\n2+ hrs AND all Decision Matrix rows\nterminal AND review scheduled)) is (no — continue monitoring) not (yes)
+
+:Incident Commander closes incident;
+stop
+
+legend right
+  Normal path: evidence points toward
+  a coherent explanation.
+  Ambiguity path: evidence supports
+  multiple hypotheses (the default
+  case in this repository's dataset).
+  Escalation path: high customer risk
+  or low reversibility forces joint
+  human sign-off regardless of severity.
+  Closure is always a human decision.
+endlegend
+
+@enduml

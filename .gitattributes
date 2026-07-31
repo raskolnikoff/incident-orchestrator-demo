@@ -1,0 +1,12 @@
+# Force consistent LF line endings for all text files, regardless of a
+# contributor's OS or local core.autocrlf setting, and independent of
+# GitHub Actions runner defaults. This repository's CI (validate.yml)
+# regenerates dataset/*.csv and diffs the result against what's
+# committed; if line endings depended on ambient git config instead of
+# being pinned here, that check could fail on pure whitespace noise
+# rather than a real content difference.
+* text=auto eol=lf
+
+# Rendered raster images are binary — never run text normalization or
+# line-ending diffs against them.
+*.png binary

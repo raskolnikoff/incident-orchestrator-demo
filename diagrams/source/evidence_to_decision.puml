@@ -1,0 +1,76 @@
+@startuml evidence_to_decision
+title OIOF — Evidence-to-Decision Pipeline
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #4A5568
+skinparam activity {
+  BackgroundColor #F7FAFC
+  BorderColor #4A5568
+  DiamondBackgroundColor #FDF0E6
+  DiamondBorderColor #A0522D
+}
+skinparam partition {
+  BackgroundColor #FAFAFA
+  BorderColor #A0AEC0
+  FontStyle bold
+}
+skinparam note {
+  BackgroundColor #FFFDF0
+  BorderColor #D4B106
+}
+
+start
+
+partition "Evidence Layer" {
+  :Raw evidence records\n(logs, metrics, feedback,\nchange records, comms);
+  :Tag with evidence_id\nper evidence_manifest.yaml;
+}
+
+partition "Classification Layer (Prompt 01)" {
+  split
+    :Confirmed facts (A);
+  split again
+    :Evidence-supported\ninferences (B);
+  split again
+    :Competing hypotheses (C)\ne.g. H1..H4;
+    note right
+      Hypotheses are never collapsed
+      to a single winner inside the
+      classification layer — see
+      dataset/incident_brief.md,
+      "Why this is not a
+      single-cause incident."
+    end note
+  split again
+    :Contradictions (F);
+  split again
+    :Missing evidence (E) /\nunresolved questions (D);
+  end split
+  :Every item cites\nits evidence_id(s);
+}
+
+partition "Review Layer (Prompt 02)" {
+  :Independent challenge —\naccept / revise / defer / reject\nper claim, per perspective;
+}
+
+partition "Decision Layer" {
+  :Draft Decision Matrix entries\n(one per action requiring\nhuman judgment);
+  switch (Human approval gate)
+  case (approved)
+    :Status: Approved & Executed;
+  case (rejected)
+    :Status: Rejected;
+  case (more evidence needed)
+    :Status: Deferred;
+  endswitch
+}
+
+partition "Audit Layer" {
+  :Every finding + decision\nlinked back to evidence_id(s)\nin the audit trail;
+}
+
+stop
+
+@enduml

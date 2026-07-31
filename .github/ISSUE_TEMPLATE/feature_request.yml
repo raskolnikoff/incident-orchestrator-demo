@@ -1,0 +1,51 @@
+name: Feature or extension request
+description: Propose a new extension, incident archetype, prompt, or tooling improvement.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository is a design pattern demo, not a product with an
+        open-ended roadmap. See the README's "Extension ideas" and
+        `docs/limitations.md` before filing — your idea may already be
+        listed there as deliberate future scope.
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What are you proposing?
+      description: A clear description of the extension or change.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why is this useful?
+      description: What does it demonstrate or unblock that the current scope doesn't?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of the framework does this touch?
+      options:
+        - New incident archetype / dataset
+        - Prompt design (orchestrator, challenge, blueprint, brief)
+        - Diagrams / visual design
+        - Schemas / validation tooling
+        - Governance / RACI / accountability model
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: governance
+    attributes:
+      label: Governance boundary
+      description: This framework's central constraint is that an LLM is never the accountable decision owner (see docs/governance.md).
+      options:
+        - label: This proposal keeps every consequential decision with a named human role, with the LLM limited to synthesis, drafting, or recommendation.
+          required: true

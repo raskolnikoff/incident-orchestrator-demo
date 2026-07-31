@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Human-in-the-loop incident workflow: evidence collection and execution are system steps, drafting and challenge are LLM steps, and a human approval gate sits before any execution. A missed deadline escalates to a human and never auto-approves.">
+  <title>Human-in-the-loop incident workflow</title>
+
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+    <marker id="arrowAmber2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#B45309"/>
+    </marker>
+
+    <g id="docStackIcon2">
+      <rect x="-22" y="-14" width="36" height="44" rx="5" fill="#FFFFFF" stroke="#6B7280" stroke-width="2.5"/>
+      <rect x="-14" y="-22" width="36" height="44" rx="5" fill="#F3F4F6" stroke="#6B7280" stroke-width="2.5"/>
+      <line x1="-6" y1="-10" x2="16" y2="-10" stroke="#9CA3AF" stroke-width="2.5"/>
+      <line x1="-6" y1="0" x2="16" y2="0" stroke="#9CA3AF" stroke-width="2.5"/>
+      <line x1="-6" y1="10" x2="10" y2="10" stroke="#9CA3AF" stroke-width="2.5"/>
+    </g>
+
+    <g id="synthesisIcon2" stroke="#1D4ED8" stroke-width="2.5" fill="#BFDBFE">
+      <line x1="-20" y1="14" x2="0" y2="-16" stroke-linecap="round"/>
+      <line x1="20" y1="14" x2="0" y2="-16" stroke-linecap="round"/>
+      <line x1="-20" y1="14" x2="20" y2="14" stroke-linecap="round"/>
+      <circle cx="0" cy="-16" r="7"/>
+      <circle cx="-20" cy="14" r="7"/>
+      <circle cx="20" cy="14" r="7"/>
+    </g>
+
+    <g id="reviewIcon2" fill="none" stroke="#1D4ED8" stroke-width="3">
+      <circle cx="-4" cy="-4" r="16" fill="#BFDBFE"/>
+      <line x1="8" y1="8" x2="20" y2="20" stroke-linecap="round"/>
+    </g>
+
+    <g id="gearIcon2" fill="#9CA3AF">
+      <circle cx="0" cy="0" r="14"/>
+      <g>
+        <rect x="-4" y="-24" width="8" height="12" rx="2"/>
+        <rect x="-4" y="12" width="8" height="12" rx="2"/>
+        <rect x="-4" y="-24" width="8" height="12" rx="2" transform="rotate(45)"/>
+        <rect x="-4" y="12" width="8" height="12" rx="2" transform="rotate(45)"/>
+        <rect x="-4" y="-24" width="8" height="12" rx="2" transform="rotate(90)"/>
+        <rect x="-4" y="12" width="8" height="12" rx="2" transform="rotate(90)"/>
+        <rect x="-4" y="-24" width="8" height="12" rx="2" transform="rotate(135)"/>
+        <rect x="-4" y="12" width="8" height="12" rx="2" transform="rotate(135)"/>
+      </g>
+      <circle cx="0" cy="0" r="6" fill="#FFFFFF"/>
+    </g>
+
+    <g id="ledgerIcon2">
+      <rect x="-18" y="-22" width="36" height="44" rx="5" fill="#F3F4F6" stroke="#6B7280" stroke-width="2.5"/>
+      <line x1="-10" y1="-8" x2="10" y2="-8" stroke="#9CA3AF" stroke-width="2.5"/>
+      <line x1="-10" y1="2" x2="10" y2="2" stroke="#9CA3AF" stroke-width="2.5"/>
+      <line x1="-10" y1="12" x2="4" y2="12" stroke="#9CA3AF" stroke-width="2.5"/>
+    </g>
+
+    <g id="personIcon2">
+      <circle cx="0" cy="-15" r="12"/>
+      <path d="M -22,24 C -22,2 -12,-8 0,-8 C 12,-8 22,2 22,24 Z"/>
+    </g>
+  </defs>
+
+  <style>
+    .eyebrow2 { font: 600 18px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 2px; fill: #6B7280; }
+    .title2   { font: 700 46px/1.15 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #111827; }
+    .tag2     { font: 700 12px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 1.5px; }
+    .nodeTitle2 { font: 700 18px/1.25 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #1F2937; text-anchor: middle; }
+    .gateTitle2 { font: 700 21px/1.25 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #78350F; text-anchor: middle; }
+    .escLabel2  { font: 600 15px/1.4 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #92400E; text-anchor: middle; }
+    .footer2  { font: 500 16px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: #9CA3AF; }
+  </style>
+
+  <rect x="0" y="0" width="1600" height="900" fill="#FFFFFF"/>
+
+    <text x="64" y="72" class="eyebrow2">OPERATIONAL INCIDENT ORCHESTRATION FRAMEWORK</text>
+  <text x="64" y="132" class="title2">Human-in-the-loop incident workflow</text>
+  <line x1="64" y1="172" x2="1536" y2="172" stroke="#E5E7EB" stroke-width="2"/>
+
+    <line x1="180" y1="360" x2="1420" y2="360" stroke="#D1D5DB" stroke-width="2.5"/>
+
+    <g transform="translate(180,360)">
+    <circle r="42" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2.5"/>
+    <use href="#docStackIcon2"/>
+  </g>
+  <rect x="80" y="440" width="200" height="30" rx="15" fill="#F3F4F6"/>
+  <text x="180" y="461" text-anchor="middle" class="tag2" fill="#4B5563">SYSTEM</text>
+  <text x="180" y="510" class="nodeTitle2">Evidence collected</text>
+  <text x="180" y="534" class="nodeTitle2" font-weight="400" font-size="15" fill="#6B7280">Deterministic, validated</text>
+
+    <line x1="248" y1="360" x2="322" y2="360" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arrow2)"/>
+
+    <g transform="translate(408,360)">
+    <circle r="42" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2.5"/>
+    <use href="#synthesisIcon2"/>
+  </g>
+  <rect x="308" y="440" width="200" height="30" rx="15" fill="#DBEAFE"/>
+  <text x="408" y="461" text-anchor="middle" class="tag2" fill="#1D4ED8">LLM</text>
+  <text x="408" y="510" class="nodeTitle2">Drafts analysis</text>
+  <text x="408" y="534" class="nodeTitle2" font-weight="400" font-size="15" fill="#6B7280">Facts, inferences, options</text>
+
+    <line x1="476" y1="360" x2="550" y2="360" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arrow2)"/>
+
+    <g transform="translate(636,360)">
+    <circle r="42" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2.5"/>
+    <use href="#reviewIcon2"/>
+  </g>
+  <rect x="536" y="440" width="200" height="30" rx="15" fill="#DBEAFE"/>
+  <text x="636" y="461" text-anchor="middle" class="tag2" fill="#1D4ED8">LLM · FRESH CONTEXT</text>
+  <text x="636" y="510" class="nodeTitle2">Independent challenge</text>
+  <text x="636" y="534" class="nodeTitle2" font-weight="400" font-size="15" fill="#6B7280">Stress-tests the draft</text>
+
+    <line x1="704" y1="360" x2="778" y2="360" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arrow2)"/>
+
+    <g transform="translate(900,352)">
+    <circle r="58" fill="#FFFBEB" stroke="#F59E0B" stroke-width="4"/>
+    <g fill="#92400E" transform="translate(0,-4)"><use href="#personIcon2"/></g>
+  </g>
+  <rect x="770" y="446" width="260" height="32" rx="16" fill="#FDE68A"/>
+  <text x="900" y="468" text-anchor="middle" class="tag2" fill="#78350F">HUMAN · NAMED OWNER</text>
+  <text x="900" y="520" class="gateTitle2">Approval gate</text>
+  <text x="900" y="546" text-anchor="middle" style="font: 600 15px -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;" fill="#92400E">Nothing executes without it</text>
+
+    <line x1="972" y1="360" x2="1046" y2="360" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arrow2)"/>
+
+    <g transform="translate(1132,360)">
+    <circle r="42" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2.5"/>
+    <use href="#gearIcon2"/>
+  </g>
+  <rect x="1032" y="440" width="200" height="30" rx="15" fill="#F3F4F6"/>
+  <text x="1132" y="461" text-anchor="middle" class="tag2" fill="#4B5563">SYSTEM</text>
+  <text x="1132" y="510" class="nodeTitle2">Controlled execution</text>
+  <text x="1132" y="534" class="nodeTitle2" font-weight="400" font-size="15" fill="#6B7280">Reversible where possible</text>
+
+    <line x1="1200" y1="360" x2="1274" y2="360" stroke="#9CA3AF" stroke-width="2.5" marker-end="url(#arrow2)"/>
+
+    <g transform="translate(1360,360)">
+    <circle r="42" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2.5"/>
+    <use href="#ledgerIcon2"/>
+  </g>
+  <rect x="1260" y="440" width="200" height="30" rx="15" fill="#F3F4F6"/>
+  <text x="1360" y="461" text-anchor="middle" class="tag2" fill="#4B5563">SYSTEM</text>
+  <text x="1360" y="510" class="nodeTitle2">Audit trail</text>
+  <text x="1360" y="534" class="nodeTitle2" font-weight="400" font-size="15" fill="#6B7280">Evidence-linked record</text>
+
+    <path d="M 840,600 C 780,660 820,700 900,700 C 980,700 1000,660 950,608"
+        fill="none" stroke="#B45309" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrowAmber2)"/>
+  <text x="900" y="748" text-anchor="middle" class="escLabel2">Deadline missed -&gt; escalates to a human</text>
+  <text x="900" y="770" text-anchor="middle" class="escLabel2">Never auto-approves</text>
+
+    <line x1="64" y1="800" x2="1536" y2="800" stroke="#E5E7EB" stroke-width="1.5"/>
+  <text x="64" y="836" class="footer2">Illustrative framework diagram · synthetic example, not a real incident</text>
+  <text x="1536" y="836" text-anchor="end" class="footer2">2 / 3</text>
+</svg>

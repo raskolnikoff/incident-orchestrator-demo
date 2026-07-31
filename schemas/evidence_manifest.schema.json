@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/oiof/schemas/evidence_manifest.schema.json",
+  "title": "Evidence Manifest",
+  "description": "Logical schema for dataset/evidence_manifest.yaml. The YAML file uses a deliberately restricted subset (flat records, inline lists) so it can be parsed with the Python standard library; this JSON Schema documents the same structure for tooling that prefers JSON Schema validation.",
+  "type": "object",
+  "required": ["schema_version", "incident_id", "evidence"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "incident_id": { "type": "string" },
+    "generated_by": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidenceRecord" }
+    }
+  },
+  "$defs": {
+    "evidenceRecord": {
+      "type": "object",
+      "required": [
+        "id",
+        "category",
+        "source_file",
+        "description",
+        "reliability",
+        "collection_method"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable evidence identifier, e.g. LOG-APP-001, PAY-METRIC-003, REL-001.",
+          "pattern": "^[A-Z]+(-[A-Z]+)*-[0-9]{3,4}$"
+        },
+        "category": { "type": "string" },
+        "source_file": {
+          "type": "string",
+          "description": "Path, relative to the repository root, of the underlying data or document."
+        },
+        "description": {
+          "type": "string",
+          "description": "What this evidence bucket contains and, where useful, what it does and does not establish."
+        },
+        "record_count": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Number of raw records tagged with this evidence_id. Null for derived aggregates or non-tabular narrative documents."
+        },
+        "time_range_start": { "type": ["string", "null"], "format": "date-time" },
+        "time_range_end": { "type": ["string", "null"], "format": "date-time" },
+        "regions": {
+          "type": ["array", "null"],
+          "items": { "type": "string", "enum": ["NA", "EU", "APAC"] }
+        },
+        "reliability": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "collection_method": { "type": "string" },
+        "known_limitations": { "type": "string" }
+      }
+    }
+  }
+}

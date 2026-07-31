@@ -1,0 +1,41 @@
+feedback_id,evidence_id,timestamp_reported,region,channel,payment_method,symptom_category,sentiment,delay_hours_est,free_text
+CS-0021,CS-FEEDBACK-003,2026-07-30T08:32:58Z,APAC,app_store_review,paypal,config_or_page_error,negative,1.7,"Checkout page showed an error about invalid configuration, could not complete order with paypal."
+CS-0038,CS-FEEDBACK-006,2026-07-30T09:38:14Z,NA,app_store_review,paypal,ambiguous_mixed,neutral,4.2,"Something weird with checkout today, hard to describe, just didn't work properly."
+CS-0024,CS-FEEDBACK-004,2026-07-30T10:54:15Z,EU,app_store_review,apple_pay,slow_checkout_timeout,negative,2.0,Checkout spinner just kept loading for over a minute before failing with apple pay.
+CS-0009,CS-FEEDBACK-002,2026-07-30T11:04:03Z,EU,social_media,mastercard,declined_payment_fraud_like,negative,2.5,"Card (mastercard) rejected at checkout, message said 'please contact your bank' — bank confirms no issue."
+CS-0031,CS-FEEDBACK-004,2026-07-30T11:47:19Z,NA,live_chat,google_pay,slow_checkout_timeout,negative,0.9,Checkout spinner just kept loading for over a minute before failing with google pay.
+CS-0023,CS-FEEDBACK-003,2026-07-30T12:07:18Z,APAC,live_chat,visa,config_or_page_error,negative,4.2,"App crashed during checkout, page said something about session/config error."
+CS-0032,CS-FEEDBACK-005,2026-07-30T12:26:38Z,APAC,app_store_review,mastercard,delayed_report,negative,17.5,"Card (mastercard) rejected at checkout, message said 'please contact your bank' — bank confirms no issue."
+CS-0035,CS-FEEDBACK-005,2026-07-30T13:03:02Z,EU,app_store_review,visa,delayed_report,negative,16.6,"Card (visa) rejected at checkout, message said 'please contact your bank' — bank confirms no issue."
+CS-0037,CS-FEEDBACK-006,2026-07-30T13:32:14Z,APAC,social_media,mastercard,ambiguous_mixed,neutral,2.3,"Not sure what happened but my order didn't go through, tried twice with different cards."
+CS-0022,CS-FEEDBACK-003,2026-07-30T13:34:21Z,APAC,live_chat,amex,config_or_page_error,negative,1.1,"Promo code disappeared and checkout page looked outdated, then payment with amex failed."
+CS-0011,CS-FEEDBACK-002,2026-07-30T13:35:33Z,EU,app_store_review,google_pay,declined_payment_fraud_like,negative,2.1,"Payment blocked with google pay, very frustrating as I use this card here every week."
+CS-0007,CS-FEEDBACK-001,2026-07-30T13:53:53Z,NA,live_chat,paypal,declined_payment,negative,2.3,Checkout kept spinning and then said my paypal payment failed. I was charged twice on my statement.
+CS-0034,CS-FEEDBACK-005,2026-07-30T14:02:23Z,APAC,app_store_review,paypal,delayed_report,negative,13.1,"Tried to pay with paypal, got 'transaction could not be completed' three times in a row."
+CS-0014,CS-FEEDBACK-002,2026-07-30T14:05:09Z,EU,live_chat,visa,declined_payment_fraud_like,negative,1.0,"Got a fraud warning message when trying to pay with visa, but this is my normal card."
+CS-0036,CS-FEEDBACK-005,2026-07-30T14:08:35Z,EU,app_store_review,mastercard,delayed_report,negative,7.8,Checkout spinner just kept loading for over a minute before failing with mastercard.
+CS-0028,CS-FEEDBACK-004,2026-07-30T14:29:38Z,APAC,live_chat,amex,slow_checkout_timeout,negative,1.9,Checkout spinner just kept loading for over a minute before failing with amex.
+CS-0026,CS-FEEDBACK-004,2026-07-30T14:32:12Z,NA,live_chat,google_pay,slow_checkout_timeout,negative,0.4,Checkout spinner just kept loading for over a minute before failing with google pay.
+CS-0005,CS-FEEDBACK-001,2026-07-30T14:43:50Z,NA,app_store_review,google_pay,declined_payment,negative,1.1,My google pay card was declined at checkout but my bank shows no attempt. Order never completed.
+CS-0033,CS-FEEDBACK-005,2026-07-30T14:49:37Z,NA,live_chat,visa,delayed_report,negative,16.3,"Site felt very slow during checkout today, payment with visa eventually timed out."
+CS-0013,CS-FEEDBACK-002,2026-07-30T14:54:52Z,EU,app_store_review,mastercard,declined_payment_fraud_like,negative,1.1,"My usual mastercard card suddenly stopped working on your site today, worked yesterday."
+CS-0002,CS-FEEDBACK-001,2026-07-30T15:04:01Z,NA,app_store_review,google_pay,declined_payment,negative,1.1,"Tried to pay with google pay, got 'transaction could not be completed' three times in a row."
+CS-0001,CS-FEEDBACK-001,2026-07-30T15:14:15Z,NA,app_store_review,paypal,declined_payment,negative,2.0,"Tried to pay with paypal, got 'transaction could not be completed' three times in a row."
+CS-0025,CS-FEEDBACK-004,2026-07-30T15:27:50Z,APAC,social_media,paypal,slow_checkout_timeout,negative,1.2,"Site felt very slow during checkout today, payment with paypal eventually timed out."
+CS-0003,CS-FEEDBACK-001,2026-07-30T15:56:09Z,NA,live_chat,apple_pay,declined_payment,negative,3.0,"Tried to pay with apple pay, got 'transaction could not be completed' three times in a row."
+CS-0012,CS-FEEDBACK-002,2026-07-30T16:02:49Z,EU,app_store_review,google_pay,declined_payment_fraud_like,negative,3.4,"Got a fraud warning message when trying to pay with google pay, but this is my normal card."
+CS-0029,CS-FEEDBACK-004,2026-07-30T16:07:14Z,APAC,live_chat,mastercard,slow_checkout_timeout,negative,0.3,"Site felt very slow during checkout today, payment with mastercard eventually timed out."
+CS-0010,CS-FEEDBACK-002,2026-07-30T16:07:25Z,EU,app_store_review,apple_pay,declined_payment_fraud_like,negative,2.8,"My usual apple pay card suddenly stopped working on your site today, worked yesterday."
+CS-0015,CS-FEEDBACK-002,2026-07-30T16:42:48Z,EU,support_ticket,mastercard,declined_payment_fraud_like,negative,0.9,"My usual mastercard card suddenly stopped working on your site today, worked yesterday."
+CS-0008,CS-FEEDBACK-001,2026-07-30T16:45:06Z,NA,app_store_review,google_pay,declined_payment,negative,2.4,Checkout kept spinning and then said my google pay payment failed. I was charged twice on my statement.
+CS-0027,CS-FEEDBACK-004,2026-07-30T16:55:01Z,EU,support_ticket,google_pay,slow_checkout_timeout,negative,0.4,Checkout spinner just kept loading for over a minute before failing with google pay.
+CS-0006,CS-FEEDBACK-001,2026-07-30T17:09:26Z,NA,social_media,google_pay,declined_payment,negative,2.7,My google pay card was declined at checkout but my bank shows no attempt. Order never completed.
+CS-0039,CS-FEEDBACK-006,2026-07-30T17:35:31Z,APAC,live_chat,google_pay,ambiguous_mixed,neutral,4.6,"Something weird with checkout today, hard to describe, just didn't work properly."
+CS-0004,CS-FEEDBACK-001,2026-07-30T17:49:49Z,NA,social_media,mastercard,declined_payment,negative,0.4,"Tried to pay with mastercard, got 'transaction could not be completed' three times in a row."
+CS-0019,CS-FEEDBACK-003,2026-07-30T18:23:40Z,APAC,support_ticket,apple_pay,config_or_page_error,negative,2.4,"Checkout page showed an error about invalid configuration, could not complete order with apple pay."
+CS-0030,CS-FEEDBACK-004,2026-07-30T19:07:21Z,NA,app_store_review,apple_pay,slow_checkout_timeout,negative,0.6,Page hung on 'processing payment' for ages then errored out.
+CS-0018,CS-FEEDBACK-003,2026-07-30T19:32:26Z,APAC,live_chat,google_pay,config_or_page_error,negative,3.2,"Promo code disappeared and checkout page looked outdated, then payment with google pay failed."
+CS-0016,CS-FEEDBACK-002,2026-07-30T19:32:49Z,EU,social_media,paypal,declined_payment_fraud_like,negative,3.5,"Payment blocked with paypal, very frustrating as I use this card here every week."
+CS-0020,CS-FEEDBACK-003,2026-07-30T19:34:41Z,APAC,live_chat,visa,config_or_page_error,negative,4.9,"App crashed during checkout, page said something about session/config error."
+CS-0017,CS-FEEDBACK-003,2026-07-30T20:25:34Z,APAC,support_ticket,paypal,config_or_page_error,negative,3.2,"Getting a strange error page when trying to check out, tried refreshing several times."
+CS-0040,CS-FEEDBACK-006,2026-07-30T21:06:33Z,EU,social_media,visa,ambiguous_mixed,neutral,2.5,"Order failed, then succeeded on retry an hour later. Confusing experience."
