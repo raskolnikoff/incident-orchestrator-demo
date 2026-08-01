@@ -123,4 +123,3 @@ the same shape as `dataset/evidence_manifest.yaml`.
 - `docs/governance.md` for the full RACI and escalation rules.
 - `docs/limitations.md` for what this repository deliberately does not
   claim or implement.
-- `docs/linkedin-summary.md` if you're sharing this repository publicly.

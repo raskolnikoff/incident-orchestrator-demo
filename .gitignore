@@ -4,7 +4,6 @@
 # output, because the portfolio value depends on them being visible
 # without a build step:
 #   - diagrams/rendered/*.svg, *.png   (PlantUML output)
-#   - assets/linkedin/rendered/*.svg   (carousel export)
 #   - dataset/*.jsonl, dataset/*.csv   (deterministic synthetic dataset)
 #   - dataset/source_checksums.sha256  (evidence integrity snapshot)
 # Do not add broad patterns (e.g. bare *.svg, *.png, *.csv, *.jsonl)
@@ -81,11 +80,9 @@ plantuml.jar
 .aider*
 
 # --- Local-only exports and artifacts -----------------------------------------
-# Guards against ad hoc raster exports (e.g. following the
-# `rsvg-convert ... -o 01.png` example in assets/linkedin/README.md)
-# landing at the repo root instead of a tracked rendered/ directory.
-# Anchored to root (leading slash) so it never matches
-# diagrams/rendered/ or assets/linkedin/rendered/.
+# Guards against ad hoc raster exports landing at the repo root instead
+# of a tracked rendered/ directory. Anchored to root (leading slash) so
+# it never matches diagrams/rendered/.
 /*.png
 /*.jpg
 /*.jpeg

@@ -89,7 +89,7 @@ EXCLUDE_DIRS = {".git", "diagrams/rendered"}
 # This validator's own denylist necessarily contains the prohibited
 # strings it's checking for, and its own regex source contains
 # secret-shaped patterns by definition - exclude it from its own scan.
-EXCLUDE_FILES = {"scripts/validate_dataset.py", "scripts/validate_linkedin_assets.py"}
+EXCLUDE_FILES = {"scripts/validate_dataset.py"}
 
 
 def iter_repo_text_files():

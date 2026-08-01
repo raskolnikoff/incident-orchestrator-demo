@@ -188,20 +188,17 @@ Full table and diagram: [`docs/governance.md`](docs/governance.md).
 ├── README.md, LICENSE, CONTRIBUTING.md, CODE_OF_CONDUCT.md,
 │   SECURITY.md, CHANGELOG.md, CITATION.cff, Makefile
 ├── docs/                    architecture, methodology, governance,
-│                            limitations, walkthrough, LinkedIn material
+│                            limitations, walkthrough
 ├── prompts/                 4 model-agnostic prompts + design notes
 ├── dataset/                 synthetic evidence set + evidence manifest
 ├── examples/                6 illustrative example outputs
 ├── diagrams/
 │   ├── source/               6 PlantUML diagrams (editable source)
 │   └── rendered/              SVG + PNG output
-├── assets/linkedin/
-│   ├── source/                3 editable 16:9 carousel SVGs
-│   └── rendered/               export, ready to post
 ├── schemas/                  4 JSON Schemas (evidence, finding,
 │                            decision matrix, automation blueprint)
 ├── scripts/                  dataset generator + validators (stdlib only)
-├── tests/                    unittest suite (37 tests)
+├── tests/                    unittest suite (29 tests)
 └── .github/workflows/        validate.yml, render-diagrams.yml
 ```
 
@@ -212,7 +209,7 @@ git clone https://github.com/raskolnikoff/incident-orchestrator-demo.git
 cd incident-orchestrator-demo
 
 make validate   # dataset integrity + evidence-traceability checks
-make test        # unit + integration test suite (37 tests)
+make test        # unit + integration test suite (29 tests)
 make diagrams     # re-render PlantUML sources (requires local PlantUML + Java)
 make summary      # compact statistical summary of the dataset
 ```

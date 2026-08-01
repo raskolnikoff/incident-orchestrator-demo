@@ -26,9 +26,6 @@ jobs:
       - name: Validate examples (evidence traceability)
         run: python3 scripts/validate_examples.py
 
-      - name: Validate LinkedIn carousel assets
-        run: python3 scripts/validate_linkedin_assets.py
-
       - name: Run test suite
         run: python3 -m unittest discover -s tests -v
 
